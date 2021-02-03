@@ -2,5 +2,4 @@
 .vs
 .vscode
 packages
-bin
 obj

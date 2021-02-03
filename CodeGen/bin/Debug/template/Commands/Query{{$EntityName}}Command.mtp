@@ -1,0 +1,18 @@
+﻿using MediatR;
+using YL.FluentValidation;
+
+/// <summary>
+/// 
+/// Author:   {{$GenInfo}}
+/// company： {{$Company}}
+/// dept：    {{$Department}}
+/// date:     {{$DataTime}}
+/// 
+/// </summary>
+namespace {{$ModelName}}.Commands
+{
+    public class Query{{$PreEntityName}}Command : IRequest<PubResponse>
+    {
+        public {{$pkFieldType}} {{$PkFieldName}} { get; set; }
+    }
+}

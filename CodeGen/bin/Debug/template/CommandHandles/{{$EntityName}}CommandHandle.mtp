@@ -1,0 +1,60 @@
+﻿using Mapster;
+using MediatR;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using YL.Core.Extensions;
+using YL.FluentValidation;
+using YL.NetCoreApp;
+using {{$ModelName}}.Commands;
+using {{$ModelName}}.Entities;
+using {{$ModelName}}.IRepository;
+
+/// <summary>
+/// 
+/// Author:   {{$GenInfo}}
+/// company： {{$Company}}
+/// dept：    {{$Department}}
+/// date:     {{$DataTime}}
+/// 
+/// </summary>
+namespace {{$ModelName}}.CommandHandles
+{
+    public class {{$PreEntityName}}CommandHandle : 
+        IRequestHandler<Create{{$PreEntityName}}Command, PubResponse>,
+        IRequestHandler<Update{{$PreEntityName}}Command, PubResponse>,
+        IRequestHandler<Query{{$PreEntityName}}Command, PubResponse>,
+        IRequestHandler<Delete{{$PreEntityName}}Command, PubResponse>
+    {
+        private readonly I{{$PreEntityName}}Repository _{{$preEntityName}}Repository;
+        private readonly GlobalCore _globalCore;
+
+        public {{$EntityName}}CommandHandle(GlobalCore globalCore, I{{$PreEntityName}}Repository {{$preEntityName}}Repository)
+        {
+            _globalCore = globalCore;
+            _{{$preEntityName}}Repository = {{$preEntityName}}Repository;
+        }
+
+        public Task<PubResponse> Handle(Create{{$PreEntityName}}Command request, CancellationToken cancellationToken)
+        {
+            var destObject = request.Adapt<Create{{$PreEntityName}}Command, {{$PreEntityName}}>();
+            var flag = _{{$preEntityName}}Repository.Insert(destObject);
+            return flag ? PubResponse.Success("操作成功").ToAsync() : PubResponse.Fail("error", "操作失败").ToAsync();
+        }
+
+        public Task<PubResponse> Handle(Update{{$PreEntityName}}Command request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PubResponse> Handle(Query{{$PreEntityName}}Command request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PubResponse> Handle(Delete{{$PreEntityName}}Command request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

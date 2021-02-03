@@ -1,0 +1,36 @@
+﻿using FluentValidation;
+using {{$ModelName}}.Commands;
+using {{$ModelName}}.IRepository;
+
+/// <summary>
+/// 
+/// Author:   {{$GenInfo}}
+/// company： {{$Company}}
+/// dept：    {{$Department}}
+/// date:     {{$DataTime}}
+/// 
+/// </summary>
+namespace {{$ModelName}}.Validators
+{
+    public class Create{{$PreEntityName}}CommandValidator : AbstractValidator<Create{{$PreEntityName}}Command>
+    {
+        private readonly I{{$PreEntityName}}Repository _{{$PreEntityName}}Repository;
+
+        public Create{{$PreEntityName}}CommandValidator(I{{$PreEntityName}}Repository {{$preEntityName}}Repository)
+        {
+            _{{$PreEntityName}}Repository = {{$preEntityName}}Repository;
+
+            //RuleFor(c => c.No).NotEmpty().WithMessage("不能为空");
+            //RuleFor(c => c.No).Must(Validator).WithMessage("重复");
+        }
+
+        // 自定义校验逻辑
+        private bool Validator(Create{{$PreEntityName}}Command command, string No)
+        {
+            //var dept = _{{$PreEntityName}}Repository.QueryableToEntity(c => c.No == No && c.DelFlag == 0);
+            //return dept == null;
+
+            return false;
+        }
+    }
+}

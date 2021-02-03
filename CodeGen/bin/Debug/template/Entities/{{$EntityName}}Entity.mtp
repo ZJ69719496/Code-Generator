@@ -1,0 +1,29 @@
+using SqlSugar;
+using YL.Orm;
+
+/// <summary>
+/// 
+/// Author:   {{$GenInfo}}
+/// company： {{$Company}}
+/// dept：    {{$Department}}
+/// date:     {{$DataTime}}
+/// 
+/// </summary>
+namespace {{$ModelName}}.Entities
+{
+    [SugarTable("{{$TableName}}")]
+    public partial class {{$EntityName}} : BaseEntity<{{$pkFieldType}}>
+    {
+        [SugarColumn(ColumnName = "{{$pkColumnName}}", IsPrimaryKey = true)]
+        public {{$pkFieldType}} {{$PkFieldName}} { get; set; }
+
+        // 下面普通字段应该循环生成
+        {{loop in cols}}
+        
+        [SugarColumn(ColumnName = "{{$columnName}}")]
+        public {{$fieldType}} {{$FieldName}} { get; set; }
+
+        {{loop end}}
+
+    }
+}

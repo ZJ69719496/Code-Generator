@@ -1,0 +1,18 @@
+﻿using {{$modelName}}.Entities;
+using YL.Orm.Repository;
+
+/// <summary>
+/// 
+/// Author:   {{$GenInfo}}
+/// company： {{$Company}}
+/// dept：    {{$Department}}
+/// date:     {{$DataTime}}
+/// 
+/// </summary>
+namespace {{$ModelName}}.IRepository
+{
+    public interface I{{$PreEntityName}}Repository : IBaseRepository<{{$PreEntityName}}>
+    {
+        //TODO
+    }
+}

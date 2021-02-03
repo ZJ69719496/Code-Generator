@@ -1,0 +1,80 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
+using YL.MediatR;
+using YL.NetCoreApp;
+using {{$ModelName}}.Commands;
+
+/// <summary>
+/// 
+/// Author:   {{$GenInfo}}
+/// company： {{$Company}}
+/// dept：    {{$Department}}
+/// date:     {{$DataTime}}
+/// 
+/// </summary>
+namespace {{$ModelName}}.Controllers.v{{$ApiVersion}}
+{
+    [ApiVersion("{{$ApiVersion}}")]
+    public class {{$EntityName}}Controller : ApiBaseController
+    {
+        private readonly ILogger<{{$EntityName}}Controller> _logger;
+        private readonly IBus _bus;
+
+        public {{$EntityName}}Controller(ILogger<{{$EntityName}}Controller> logger, IBus bus)
+        {
+            _logger = logger;
+            _bus = bus;
+        }
+
+        /// <summary>
+        /// 创建{{$TableComment}}
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Post(Create{{$PreEntityName}}Command command)
+        {
+            var response = await _bus.SendAsync(command);
+            return Result(response);
+        }
+
+        /// <summary>
+        /// 查询{{$TableComment}}
+        /// </summary>
+        /// <param name="{{$pkFieldName}}"></param>
+        /// <returns></returns>
+        [HttpGet("{{{$pkFieldName}}}")]
+        public async Task<IActionResult> Get({{$pkFieldType}} {{$pkFieldName}})
+        {
+            var response = await _bus.SendAsync(new Query{{$PreEntityName}}Command() { {{$PkFieldName}} = {{$pkFieldName}}});
+            return Result(response);
+        }
+
+        /// <summary>
+        /// 修改{{$TableComment}}
+        /// </summary>
+        /// <param name="{{$pkFieldName}}"></param>
+        /// <param name="command"></param>
+        /// <returns></returns>
+        [HttpPut("{{{$pkFieldName}}}")]
+        public async Task<IActionResult> Put({{$pkFieldType}} {{$pkFieldName}}, Update{{$PreEntityName}}Command command)
+        {
+            command.{{$PkFieldName}} = {{$pkFieldName}};
+            var response = await _bus.SendAsync(command);
+            return Result(response);
+        }
+
+        /// <summary>
+        /// 删除{{$tableComment}}
+        /// </summary>
+        /// <param name="{{$pkFieldName}}"></param>
+        /// <returns></returns>
+        [HttpDelete("{{{$pkFieldName}}}")]
+        public async Task<IActionResult> Delete({{$pkFieldType}} {{$pkFieldName}})
+        {
+            var response = await _bus.SendAsync(new Delete{{$PreEntityName}}Command({{$pkFieldName}}));
+            return Result(response);
+        }
+    }
+}

@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using YL.Orm.Repository;
+using YL.Orm.UnitOfWork;
+using {{$ModelName}}.Entities;
+using {{$ModelName}}.IRepository;
+
+/// <summary>
+/// 
+/// Author:   {{$GenInfo}}
+/// company： {{$Company}}
+/// dept：    {{$Department}}
+/// date:     {{$DataTime}}
+/// 
+/// </summary>
+namespace {{$ModelName}}.Repository
+{
+    public class {{$PreEntityName}}Repository : BaseRepository<{{$PreEntityName}}>, I{{$PreEntityName}}Repository
+    {
+        private readonly IUnitOfWork _unitOfWork;
+
+        public {{$PreEntityName}}Repository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+    }
+}
